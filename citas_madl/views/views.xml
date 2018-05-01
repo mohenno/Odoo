@@ -1,0 +1,80 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<record model="ir.ui.view" id="citas_madl.list_citas_tree">
+<field name="name">Listado</field>
+<field name="model">citas_madl.cita</field>
+<field name="arch" type="xml">
+<tree>
+<field name="autor"/>
+<field name="cita"/>
+<field name="fecha"/>
+<field name="orden"/>
+
+</tree>
+</field>
+</record>
+
+
+    <record model="ir.ui.view" id="citas_madl.list_citas_form">
+      <field name="name">Listado</field>
+      <field name="model">citas_madl.cita</field>
+      <field name="arch" type="xml">
+        <form string="Listado de Citas">
+          <sheet>
+            <div class="oe_title">
+              <label for="cita" class="oe_edit_only" string="Cita">Texto de la Cita</label>
+              <h1><field name="cita"/></h1>
+            </div>
+            <separator string="Atributos de la cita" colspan="2"/>
+            <group colspan="2" col="2">
+              <field name="autor"/>
+	      <field name="fecha"/>
+              <field name="orden"/>
+              
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="citas_madl.action_window">
+      <field name="name">Ventana de Citas</field>
+      <field name="res_model">citas_madl.cita</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="convalidaciones.action_server">
+      <field name="name">convalidaciones server</field>
+      <field name="model_id" ref="model_convalidaciones_convalidaciones"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+
+    <menuitem name="Citas_madl" id="citas_madl.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Citas" id="citas_madl.citas" parent="citas_madl.menu_root"/>
+
+    <!-- actions -->
+
+    <menuitem name="Listado" id="citas_madl.citas_list" parent="citas_madl.citas"
+              action="citas_madl.action_window"/>
+
+  </data>
+</odoo>
